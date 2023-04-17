@@ -38,5 +38,14 @@ if uploaded_file is not None:
     st.write(df)
 
     fig = px.scatter(df, x='Displacement (mm)', y='Force (kN)', template="ggplot2")
+
+    fig.update_layout(
+        yaxis = dict(
+            tickmode = 'linear',
+            tick0 = 0,
+            dtick = 500,
+            tickformat = '.2f'
+        )
+    )
     st.plotly_chart(fig, use_container_width=True)
 
