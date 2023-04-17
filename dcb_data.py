@@ -90,3 +90,6 @@ if run_button:
                      labels={"Displacement": "Displacement (mm)", "Force": "Force (kN)"},)
 
         st.plotly_chart(fig, use_container_width=True)
+        
+    df['C']=df['Displacement']/df['Force']
+    st.write(df)
