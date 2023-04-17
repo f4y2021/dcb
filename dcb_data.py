@@ -31,14 +31,14 @@ st.title('DCB Data Analysis')
 
 # User Inputs
 
-a0 = st.number_input("Initial Crack Length [mm]")
+a0 = st.number_input("Initial Pre-Crack Length [mm]")
 B = st.number_input("Specimen Width [mm]")
 
 thickness= st.number_input("Specimen Thickness")
 h=thickness/2
 
-G13=st.number_input("Initial Crack Length [mm]")
-E2=st.number_input("Initial Crack Length [mm]")
+G13=st.number_input("Shear modulus (GPa)")
+E2=st.number_input("Young’s modulus in the longitudinal direction (GPa) ")
 
 
 
