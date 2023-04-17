@@ -47,9 +47,9 @@ df["Force"] = df["Force"] - df["Force"].iloc[0]
 
 # Display data as a table and as a graph in two different tabs
 with st.tabs(["🗃 Data", "📈 Chart"]):
-    with st.beta_container():
+    with st.container():
         st.write(df)
-    with st.beta_container():
+    with st.container():
         fig = px.scatter(df, x='Displacement', y='Force', template="ggplot2")
 
         st.plotly_chart(fig, use_container_width=True)
