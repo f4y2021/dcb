@@ -39,7 +39,7 @@ if uploaded_file is not None:
     displacement_row_index = None
     for row in range(len(df)):
         for col in range(len(df.columns)):
-            if df.iloc[row, col] == "Time":
+            if df.iloc[row, col] == 'Displacement':
                 displacement_row_index = row
                 break
         if displacement_row_index is not None:
