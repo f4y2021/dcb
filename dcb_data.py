@@ -32,21 +32,27 @@ st.title('DCB Data Analysis')
 # User Inputs
 
 with st.expander("User Inputs"):
-    a0 = st.number_input("Initial Pre-Crack Length [mm]")
+    a0 = st.number_input("Initial Pre-Crack Length [mm]",value=50)
     colunas12,colunas22 = st.columns(2)
 
     with colunas12:
         st.caption("Geometric Properties")
-        B = st.number_input("Specimen Width [mm]")
-        thickness= st.number_input("Specimen Thickness [mm]")
+        B = st.number_input("Specimen Width [mm]",value=25)
+        thickness= st.number_input("Specimen Thickness [mm]",value=4.4)
         h=thickness/2
     with colunas22:
         st.caption("Material Properties")
-        G13=st.number_input("Shear modulus (GPa)")
-        E2=st.number_input("Young’s modulus in the longitudinal direction (GPa) ")
+        G13=st.number_input("Shear modulus (GPa)",value=2500)
+        E2=st.number_input("Young’s modulus in the longitudinal direction (GPa)",value=8820)
+        
+ E_inter=93600
+
+T=1.18*sqrt(E2*E_inter)/G13
+
+st.write(T)
+
 
         
-
 uploaded_file = st.file_uploader("Upload DCB RAW Data CSV file", type=["csv"])
 
 run_button=st.button("Run")
