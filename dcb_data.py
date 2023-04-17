@@ -36,8 +36,11 @@ if uploaded_file is not None:
     
     df = pd.read_csv(uploaded_file, sep=",",usecols= [1,2], names=["Displacement","Force"],header=6)
     
+    
+    # Filter out rows with zero displacement, except for the last one
+    df = df.loc[(df["Displacement"].shift() != 0) | (df["Displacement"] == 0)]
+    
     # Adjust data to start from (0,0)
-    df["Displacement"] = df["Displacement"] - df["Displacement"].iloc[0]
     df["Force"] = df["Force"] - df["Force"].iloc[0]
     
     st.write(df)
