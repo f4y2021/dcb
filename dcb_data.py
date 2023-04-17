@@ -52,7 +52,10 @@ T=1.18*(sqrt(E2*E_inter))/G13
 st.write(T)
 delta=h*sqrt((E_inter/(11*G13))*(3-2*(T/(1+T))**2))
 st.write(delta)
-
+alpha=8/(B*h**3*E_inter)
+st.write(alpha)
+beta=12/(5*B*h*G13)
+st.write(beta)
         
 uploaded_file = st.file_uploader("Upload DCB RAW Data CSV file", type=["csv"])
 
