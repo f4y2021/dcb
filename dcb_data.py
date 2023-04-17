@@ -45,7 +45,7 @@ with st.expander("User Inputs"):
         G13=st.number_input("Shear modulus (GPa)",value=2500)
         E2=st.number_input("Young’s modulus in the longitudinal direction (GPa)",value=8820)
         
- E_inter=93600
+E_inter=93600
 
 T=1.18*sqrt(E2*E_inter)/G13
 
