@@ -29,6 +29,21 @@ div.stButton > button:first-child {
 
 st.title('DCB Data Analysis')
 
+# User Inputs
+
+a0 = st.number_input("Initial Crack Length [mm]")
+B = st.number_input("Specimen Width [mm]")
+
+thickness= st.number_input("Specimen Thickness")
+h=thickness/2
+
+G13=st.number_input("Initial Crack Length [mm]")
+E2=st.number_input("Initial Crack Length [mm]")
+
+
+
+
+
 
 uploaded_file = st.file_uploader("Upload DCB RAW Data CSV file", type=["csv"])
 
@@ -51,7 +66,7 @@ with tab1:
 with tab2:
 
     fig = px.scatter(df, x='Displacement', y='Force', color_discrete_sequence=["black"], 
-                 template="ggplot2", title="P-Delta Curve", 
+                 template="ggplot2", title="P − δ Curve", 
                  labels={"Displacement": "Displacement (mm)", "Force": "Force (kN)"},)
 
     st.plotly_chart(fig, use_container_width=True)
