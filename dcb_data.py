@@ -36,10 +36,20 @@ if uploaded_file is not None:
     df = pd.read_csv(uploaded_file)
 
     # Find the row index where "Displacement" is located
-    displacement_row_index = df[df.eq("Displacement").any(axis=1)].index[0]
+    displacement_row_index = None
+    for row in range(len(df)):
+        for col in range(len(df.columns)):
+            if df.iloc[row, col] == "Displacement":
+                displacement_row_index = row
+                break
+        if displacement_row_index is not None:
+            break
 
-    # Skip the appropriate number of rows to read in the displacement and force data
-    data_start_row = displacement_row_index + 2
-    df = pd.read_csv(uploaded_file, skiprows=data_start_row, usecols=[Displacement, Force])
+    if displacement_row_index is None:
+        st.write("Error: Could not find 'Displacement' in CSV file.")
+    else:
+        # Skip the appropriate number of rows to read in the displacement and force data
+        data_start_row = displacement_row_index + 2
+        df = pd.read_csv(uploaded_file, skiprows=data_start_row, usecols=[1, 2])
 
     st.write(df)
