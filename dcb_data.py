@@ -30,10 +30,11 @@ div.stButton > button:first-child {
 st.title('DCB Data Analysis')
 
 
-uploaded_file = st.file_uploader("Upload CSV file", type=["csv"])
+uploaded_file = st.file_uploader("Upload DCB RAW Data CSV file", type=["csv"])
 
 if uploaded_file is not None:
     
     df = pd.read_csv(uploaded_file, sep=",",usecols= [1,2], names=["Displacement","Force"],header=6)
     st.write(df)
+    st.line_chart(df)
 
