@@ -36,10 +36,12 @@ with st.expander("User Inputs"):
     colunas12,colunas22 = st.columns(2)
 
     with colunas12:
+        st.caption("Geometric Properties")
         B = st.number_input("Specimen Width [mm]")
         thickness= st.number_input("Specimen Thickness [mm]")
         h=thickness/2
     with colunas22:
+        st.caption("Material Properties")
         G13=st.number_input("Shear modulus (GPa)")
         E2=st.number_input("Young’s modulus in the longitudinal direction (GPa) ")
 
