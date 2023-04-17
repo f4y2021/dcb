@@ -47,30 +47,29 @@ E2=st.number_input("Young’s modulus in the longitudinal direction (GPa) ")
 
 uploaded_file = st.file_uploader("Upload DCB RAW Data CSV file", type=["csv"])
 
+run_button=st.button("Run")
 
-df = pd.read_csv(uploaded_file, sep=",",usecols= [1,2], names=["Displacement","Force"],header=6)
+if run_button:
 
-
-# Filter out rows with zero displacement
-df = df.loc[df["Displacement"] != 0]
-
-# Adjust data to start from (0,0)
-df["Displacement"] = df["Displacement"] - df["Displacement"].iloc[0]
-df["Force"] = df["Force"] - df["Force"].iloc[0]
+    df = pd.read_csv(uploaded_file, sep=",",usecols= [1,2], names=["Displacement","Force"],header=6)
 
 
-tab1, tab2 = st.tabs(["📈 Chart", "🗃 Data"])
-# Display data as a table and as a graph in two different tabs
-with tab1:
-    st.write(df)
-with tab2:
+    # Filter out rows with zero displacement
+    df = df.loc[df["Displacement"] != 0]
 
-    fig = px.scatter(df, x='Displacement', y='Force', color_discrete_sequence=["black"], 
-                 template="ggplot2", title="P − δ Curve", 
-                 labels={"Displacement": "Displacement (mm)", "Force": "Force (kN)"},)
-
-    st.plotly_chart(fig, use_container_width=True)
+    # Adjust data to start from (0,0)
+    df["Displacement"] = df["Displacement"] - df["Displacement"].iloc[0]
+    df["Force"] = df["Force"] - df["Force"].iloc[0]
 
 
+    tab1, tab2 = st.tabs(["📈 Chart", "🗃 Data"])
+    # Display data as a table and as a graph in two different tabs
+    with tab1:
+        st.write(df)
+    with tab2:
 
+        fig = px.scatter(df, x='Displacement', y='Force', color_discrete_sequence=["black"], 
+                     template="ggplot2", title="P − δ Curve", 
+                     labels={"Displacement": "Displacement (mm)", "Force": "Force (kN)"},)
 
+        st.plotly_chart(fig, use_container_width=True)
