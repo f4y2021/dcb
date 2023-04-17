@@ -35,6 +35,11 @@ uploaded_file = st.file_uploader("Upload DCB RAW Data CSV file", type=["csv"])
 if uploaded_file is not None:
     
     df = pd.read_csv(uploaded_file, sep=",",usecols= [1,2], names=["Displacement","Force"],header=6)
+    
+    # Adjust data to start from (0,0)
+    df["Displacement"] = df["Displacement"] - df["Displacement"].iloc[0]
+    df["Force"] = df["Force"] - df["Force"].iloc[0]
+    
     st.write(df)
 
     fig = px.scatter(df, x='Displacement', y='Force', template="ggplot2")
