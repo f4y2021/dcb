@@ -51,7 +51,7 @@ with tab1:
 with tab2:
 
     fig = px.scatter(df, x='Displacement', y='Force', color_discrete_sequence=["black"], 
-                 template="ggplot2", title="Displacement vs. Force", 
+                 template="ggplot2", title="P-Delta Curve", 
                  labels={"Displacement": "Displacement (mm)", "Force": "Force (kN)"},)
 
     st.plotly_chart(fig, use_container_width=True)
