@@ -49,7 +49,12 @@ tab1, tab2 = st.tabs(["📈 Chart", "🗃 Data"])
 with tab1:
     st.write(df)
 with tab2:
-    fig = px.scatter(df, x='Displacement', y='Force', template="ggplot2")
+
+    fig = px.scatter(df, x='Displacement', y='Force', color_discrete_sequence=["blue"], 
+                 template="ggplot2", title="Displacement vs. Force", 
+                 labels={"Displacement": "Displacement (mm)", "Force": "Force (kN)"},
+                 layout=dict(font=dict(family="Arial"), plot_bgcolor="white"))
+
     st.plotly_chart(fig, use_container_width=True)
 
 
