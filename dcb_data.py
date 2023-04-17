@@ -93,4 +93,5 @@ if run_button:
         
     df['C']=df['Displacement']/df['Force']
     df['A']=((108*df['C']+12*sqrt(3*((4*beta**3+27*(-df['C'])**2*alpha)/(alpha))))*alpha**2)**(1/3)
+    df['aeq']=df['A']/(6*alpha)-((2*beta)/(df['A']))
     st.write(df)
