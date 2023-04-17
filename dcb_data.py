@@ -26,9 +26,10 @@ div.stButton > button:first-child {
 }
 </style>""", unsafe_allow_html=True)
 
-st.image('logo_inegi_big.png')
+
 st.title('DCB Data Analysis')
 
+'''
 sample_name = st.text_input('Sample Name and Number')
 
 gauge_length = st.number_input("Gauge Length [mm]",0)
@@ -40,6 +41,7 @@ thickness = st.number_input("Sample Thickness [mm]",min_value=0.0,max_value=10.0
 check_force = st.checkbox("My Force is in kN",False)
 
 area = width * thickness #mm^2
+'''
 
 instron_file_ref=st.file_uploader("Choose DCB Raw Data CSV file  | Force according to selection & Displacement in mm")
 
