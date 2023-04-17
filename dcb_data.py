@@ -36,5 +36,16 @@ if uploaded_file is not None:
     
     df = pd.read_csv(uploaded_file, sep=",",usecols= [1,2], names=["Displacement","Force"],header=6)
     st.write(df)
-    st.line_chart(df)
+
+    fig = px.scatter(df, x='Displacement', y='Force', marginal_y="box",
+       marginal_x="box",template="ggplot2")
+    fig.update_layout(
+        yaxis = dict(
+            tickmode = 'linear',
+            tick0 = 0,
+            dtick = 500,
+            tickformat = '.2f'
+        )
+    )
+    st.plotly_chart(fig, use_container_width=True)
 
