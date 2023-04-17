@@ -43,6 +43,8 @@ check_force = st.checkbox("My Force is in kN",False)
 area = width * thickness #mm^2
 '''
 
+check_force = st.checkbox("My Force is in kN",False)
+
 instron_file_ref=st.file_uploader("Choose DCB Raw Data CSV file  | Force according to selection & Displacement in mm")
 
 run_button=st.button("Run")
