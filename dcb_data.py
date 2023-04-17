@@ -50,7 +50,7 @@ E_inter=93600
 
 T=1.18*(sqrt(E2*E_inter))/G13
 st.write(T)
-delta=h*sqrt((E_inter/(11*G13))*(3-2*(T/(1+T))^2))
+delta=h*sqrt((E_inter/(11*G13))*(3-2*(T/(1+T))**2))
 st.write(delta)
 
         
