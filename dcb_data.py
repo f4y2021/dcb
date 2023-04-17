@@ -47,7 +47,7 @@ with st.expander("User Inputs"):
         
 E_inter=93600
 
-T=1.18*sqrt(E2*E_inter)/G13
+T=1.18*(sqrt(E2*E_inter))/G13
 
 st.write(T)
 
