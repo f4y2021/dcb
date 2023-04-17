@@ -8,6 +8,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE."""
 import streamlit as st
 
 import numpy as np
+from numpy import sqrt 
 import pandas as pd
 
 import plotly.express as px
