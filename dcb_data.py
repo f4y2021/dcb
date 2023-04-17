@@ -33,23 +33,6 @@ st.title('DCB Data Analysis')
 uploaded_file = st.file_uploader("Upload CSV file", type=["csv"])
 
 if uploaded_file is not None:
-    df = pd.read_csv(uploaded_file)
+    df = pd.read_csv(uploaded_file, skiprows=8, usecols=[1, 2])
     st.write(df)
-    # Find the row index where "Displacement" is located
-    displacement_row_index = None
-    for row in range(len(df)):
-        for col in range(len(df.columns)):
-            if df.iloc[row, col] == 'Displacement':
-                displacement_row_index = row
-                break
-        if displacement_row_index is not None:
-            break
-
-    if displacement_row_index is None:
-        st.write("Error: Could not find 'Displacement' in CSV file.")
-    else:
-        # Skip the appropriate number of rows to read in the displacement and force data
-        data_start_row = displacement_row_index + 2
-        df = pd.read_csv(uploaded_file, skiprows=data_start_row, usecols=[1, 2])
-    #st.write(df)
 
