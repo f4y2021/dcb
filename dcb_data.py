@@ -29,21 +29,6 @@ div.stButton > button:first-child {
 
 st.title('DCB Data Analysis')
 
-'''
-sample_name = st.text_input('Sample Name and Number')
-
-gauge_length = st.number_input("Gauge Length [mm]",0)
-
-width = st.number_input("Sample Width [mm]",min_value=0.0,max_value=50.0,step=1e-3,format="%.2f")
-
-thickness = st.number_input("Sample Thickness [mm]",min_value=0.0,max_value=10.0,step=1e-3,format="%.2f")
-
-check_force = st.checkbox("My Force is in kN",False)
-
-area = width * thickness #mm^2
-'''
-
-check_force = st.checkbox("My Force is in kN",False)
 
 instron_file_ref=st.file_uploader("Choose DCB Raw Data CSV file  | Force according to selection & Displacement in mm")
 
@@ -60,52 +45,9 @@ if run_button:
 
     tabela_final=arranjar_dcb (instron_file_ref)
 
-    
-    if check_force:
-        tabela_final['Force']=tabela_final['Force']*1000 # Transformar força de kN para N caso a opçao estiver selecionada
-            
-    tabela_final['Tensile Stress']=tabela_final['Force']/area # Cálculo Tensile Stress
-    tabela_final['Deformation']=tabela_final['Displacement']/gauge_length # Cálculo Deformation
-
-    cols=['Displacement','Force','Tensile Stress','Deformation','Exx','Eyy'] #Reordenar colunas
-
-    tabela_final=tabela_final[cols] #Reordenar colunas
-
-    #print(tabela_final)
-
-    from scipy import stats
-
-    #Definir intervalos para Eyy onde serão calculados os declives e consequentemente os valores de Young's Modulus e Poisson's Ratio
-
-    #youngs_lower_bond = 0.0005 #Valor de Acordo com a Norma. Verificar!
-    #youngs_upper_bond = 0.0025 #Valor de Acordo com a Norma. Verificar!
-    #poisson_lower_bond = 0.003 #Valor de Acordo com a Norma. Verificar!
-    #poisson_upper_bond = 0.015 #Valor de Acordo com a Norma. Verificar!
-    
-
-    #Cálculo Young's Modulus
-    tabela_young_modulus=tabela_final.loc[(tabela_final['Eyy']>= youngs_lower_bond) & (tabela_final['Eyy']< youngs_upper_bond)
-                                          &(tabela_final['Tensile Stress']<0.9*tabela_final['Tensile Stress'].max())]
-    if len(tabela_young_modulus)!=0:
-        young_variable=stats.linregress(tabela_young_modulus['Eyy'],tabela_young_modulus['Tensile Stress'])
-
-    #Cálculo Poisson's Ratio
-    tabela_poisson=tabela_final.loc[(tabela_final['Eyy']>= poisson_lower_bond) & (tabela_final['Eyy']< poisson_upper_bond)
-                                   &(tabela_final['Tensile Stress']<0.9*tabela_final['Tensile Stress'].max())]
-    if len(tabela_poisson)!=0:
-        poisson_variable = stats.linregress(tabela_poisson['Eyy'],tabela_poisson['Exx'])
-
-    if young_variable.slope>0:
-        print('The Young\'s Modulus E is ' + str(round(young_variable.slope/1000,4)) + ' GPa')
-    else:
-        print('Error Calculating the Young\'s Modulus E. Value cannot be less than 0. Possible DIC error.')
-
-    print('The Poisson\'s Ratio is ' + str(abs(round(poisson_variable.slope,4))))
 
     st.dataframe(tabela_final)
-    
-    st.write('Young\'s Modulus = '+ str(round(young_variable.slope/1000,4))+' GPa')
-    st.write('Poisson\'s Ratio = ' + str(abs(round(poisson_variable.slope,4))))
+
     
     fig = px.scatter(tabela_final, x='Eyy', y='Tensile Stress', marginal_y="box",
            marginal_x="box",template="ggplot2")
