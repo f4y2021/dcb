@@ -34,7 +34,7 @@ uploaded_file = st.file_uploader("Upload CSV file", type=["csv"])
 
 if uploaded_file is not None:
     df = pd.read_csv(uploaded_file)
-
+    st.write(df)
     # Find the row index where "Displacement" is located
     displacement_row_index = None
     for row in range(len(df)):
@@ -51,5 +51,5 @@ if uploaded_file is not None:
         # Skip the appropriate number of rows to read in the displacement and force data
         data_start_row = displacement_row_index + 2
         df = pd.read_csv(uploaded_file, skiprows=data_start_row, usecols=[1, 2])
-    st.write(df)
+    #st.write(df)
 
