@@ -17,7 +17,7 @@ from plotly.subplots import make_subplots
 import re
 import sys
 
-st.set_page_config(page_title="Instron & DIC",page_icon="⏩")
+st.set_page_config(page_title="DCB",page_icon="⏩")
 
 m = st.markdown("""
 <style>
@@ -27,9 +27,7 @@ div.stButton > button:first-child {
 </style>""", unsafe_allow_html=True)
 
 st.image('logo_inegi_big.png')
-st.title('Instron and DIC File Converter')
-
-st.write("[Instron & DIC Guidelines](https://inegiuppt-my.sharepoint.com/:w:/g/personal/dcardoso_inegi_up_pt/EXSYXf4q_fRBlltb6uXLQKsBcQT2lPHlp3zaNF1FVn90Lg)")
+st.title('DCB Data Analysis')
 
 sample_name = st.text_input('Sample Name and Number')
 
@@ -41,67 +39,23 @@ thickness = st.number_input("Sample Thickness [mm]",min_value=0.0,max_value=10.0
 
 check_force = st.checkbox("My Force is in kN",False)
 
-
-with st.expander("Change Chord Modulus Calculation Strain Ranges"):
-
-    colunas12,colunas22,colunas32 = st.columns(3)
-
-    with colunas12:
-        st.caption("Young\'s Modulus")
-        youngs_lower_bond = st.number_input("Young\'s Modulus Lower Bond",min_value=0.0000,max_value=0.5000,value=0.0005,step=1e-4,format="%.4f")
-        youngs_upper_bond = st.number_input("Young\'s Modulus Upper Bond",min_value=0.0000,max_value=0.5000,value=0.0025,step=1e-4,format="%.4f")
-    with colunas32:
-        st.caption("Poisson\'s Ratio")
-        poisson_lower_bond = st.number_input("Poisson\'s Ratio Lower Bond",min_value=0.0000,max_value=0.5000,value=0.003,step=1e-4,format="%.4f")
-        poisson_upper_bond = st.number_input("Poisson\'s Ratio Upper Bond",min_value=0.0000,max_value=0.5000,value=0.015,step=1e-4,format="%.4f")
-
-#True or False LayOut
-st.write("Output Excel File Print Options")
-
-col1, col2, col3 = st.columns(3)
-
-with col1:
-    logo_f4y = st.checkbox("FIBRE4YARDS Logo",True)
-with col2:
-    logo_inegi = st.checkbox("INEGI Logo",True)
-with col3:    
-    plot_grafico = st.checkbox("Plot Stress / Strain (%)",True)
-
-'----------------------------------------------------------------------------------------------------'
-
 area = width * thickness #mm^2
 
-instron_file_ref=st.file_uploader("Choose INSTRON CSV file  | Force according to selection & Displacement in mm")
-
-dic_file_ref=st.file_uploader("Choose DIC CSV file")
+instron_file_ref=st.file_uploader("Choose DCB Raw Data CSV file  | Force according to selection & Displacement in mm")
 
 run_button=st.button("Run")
 
 if run_button:
 
-    def arranjar_instron (instron_csv_file):#Function - Input: Ficheiro RAW da Instron / Atenção ao nome das Colunas (!!); Output: DataFrame Organizado Instron
+    def arranjar_dcb (instron_csv_file):#Function - Input: Ficheiro RAW da Instron / Atenção ao nome das Colunas (!!); Output: DataFrame Organizado Instron
 
-        df1_instron = pd.read_csv(instron_csv_file,sep=",",usecols= [1,2], names=["Displacement","Force"],header=6)
+        df1_instron = pd.read_csv(instron_csv_file,sep=",",usecols= [1,2], names=["Displacement","Force"],header=8)
 
         return df1_instron
 
-    def arranjar_dic (dic_csv_file): #Function - Input: Ficheiro RAW do DIC; Output: DataFrame Organizado DIC
-        nomedascolunas=["Exx", "Eyy"] 
-        df1_dic = pd.read_csv(dic_csv_file,sep=",",usecols= ["exx [1] - Lagrange","eyy [1] - Lagrange"],header=1)
-        df1_dic.columns=nomedascolunas
-        df1_dic = df1_dic.dropna(axis=0)
 
-        return df1_dic
+    tabela_final=arranjar_dcb (instron_file_ref)
 
-    def agrupar_final (file_instron,file_dic): #Agrupar DataFrame Instron com DataFrame DIC
-        tba=pd.concat([file_instron, file_dic], axis=1)
-        #tba=tba.dropna(axis=0)
-        return tba
-
-    instron=arranjar_instron (instron_file_ref)
-    dic=arranjar_dic(dic_file_ref)
-
-    tabela_final=agrupar_final(instron,dic)
     
     if check_force:
         tabela_final['Force']=tabela_final['Force']*1000 # Transformar força de kN para N caso a opçao estiver selecionada
@@ -160,7 +114,7 @@ if run_button:
         )
     )
     st.plotly_chart(fig, use_container_width=True)
-
+'''
     #Criar Ficheiro Excel
     tabela_final.to_excel('tabela_final.xlsx', sheet_name='Test', index=False,float_format="%.5f",startrow=9, startcol=1)
 
@@ -278,3 +232,4 @@ if run_button:
         st.balloons()
     streamtest = save_virtual_workbook(wb)
     st.download_button("Download Final Excel File",streamtest,'Tabela_Final_'+str(sample_name)+'.xlsx')
+'''
