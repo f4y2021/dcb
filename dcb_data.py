@@ -47,6 +47,7 @@ with st.expander("User Inputs"):
         E2=st.number_input("Young’s modulus in the longitudinal direction (GPa)",value=8820)
         
 E_inter=93600
+C0=1.08
 
 T=1.18*(sqrt(E2*E_inter))/G13
 st.write(T)
@@ -56,6 +57,8 @@ alpha=8/(B*h**3*E_inter)
 st.write(alpha)
 beta=12/(5*B*h*G13)
 st.write(beta)
+Ef=(C0-((12*(a0+delta))/(5*B*h*G13))**(-1))*((8*(a0+delta)**3)/(B*h**3))
+st.write(Ef)
         
 uploaded_file = st.file_uploader("Upload DCB RAW Data CSV file", type=["csv"])
 
