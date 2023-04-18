@@ -76,6 +76,7 @@ if run_button:
 
     # Adjust data to start from (0,0)
     df["Displacement"] = df["Displacement"] - df["Displacement"].iloc[0]
+    df["Force"] = df["Force"]*1000
     df["Force"] = df["Force"] - df["Force"].iloc[0]
 
 
@@ -91,8 +92,8 @@ if run_button:
 
         st.plotly_chart(fig, use_container_width=True)
         
-    df['C']=df['Displacement']/(df['Force']*1000)
+    df['C']=df['Displacement']/df['Force']
     df['A']=((108*df['C']+12*sqrt(3*((4*beta**3+27*(-df['C'])**2*alpha)/(alpha))))*alpha**2)**(1/3)
     df['aeq']=df['A']/(6*alpha)-((2*beta)/(df['A']))
-    
+    df['GI']=6*
     st.write(df)
