@@ -84,7 +84,7 @@ def process_file(file):
 
     return df
 
-downsample_factor=50
+downsample_factor=30
 
 def downsample_dataframe(df, downsample_factor):
     if downsample_factor <= 1:
