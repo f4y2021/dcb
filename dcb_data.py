@@ -91,7 +91,6 @@ if run_button:
     # Initialize an empty dictionary to store the DataFrames for each file
     dataframes = {}
     
-    
     # Process each uploaded file and store the resulting DataFrame in the dictionary
     for file in uploaded_files:
         processed_df = process_file(file)
@@ -105,21 +104,32 @@ if run_button:
         df = dataframes[selected_file]
 
     
-        fig1 = px.scatter(df, x='Displacement', y='Force', color_discrete_sequence=["black"], 
-                     template="ggplot2", title="P − δ Curve", 
-                     labels={"Displacement": "Displacement (mm)", "Force": "Force (kN)"},)
-        fig1.update_traces(marker=dict(size=2))
+    fig1 = px.scatter(df, x='Displacement', y='Force', color_discrete_sequence=["black"], 
+                 template="ggplot2", title="P − δ Curve", 
+                 labels={"Displacement": "Displacement (mm)", "Force": "Force (N)"},)
+    fig1.update_traces(marker=dict(size=2))
 
-        st.plotly_chart(fig1, use_container_width=True)
+    st.plotly_chart(fig1, use_container_width=True)
 
-        fig2 = px.scatter(df, x='aeq', y='GI', color_discrete_sequence=["black"], 
-                     template="ggplot2", title="R Curve", 
-                     labels={"aeq": "Crack Equivalent Length (mm)", "GI": "Gk (N/mm)"})
-        fig2.update_traces(marker=dict(size=2))
+    fig2 = px.scatter(df, x='aeq', y='GI', color_discrete_sequence=["black"], 
+                 template="ggplot2", title="R Curve", 
+                 labels={"aeq": "Crack Equivalent Length (mm)", "GI": "Gk (N/mm)"})
+    fig2.update_traces(marker=dict(size=2))
 
-        st.plotly_chart(fig2, use_container_width=True)
+    st.plotly_chart(fig2, use_container_width=True)
         
         
     
+    # Create an empty figure with layout options
+    merged_fig = go.Figure(layout=go.Layout(title="P − δ Curve (Merged)",
+                                            xaxis_title="Displacement (mm)",
+                                            yaxis_title="Force (N)",
+                                            template="ggplot2"))
 
+    # Iterate over the DataFrames and add the data to the merged figure
+    for file_name, df in dataframes.items():
+        merged_fig.add_trace(go.Scatter(x=df['Displacement'], y=df['Force'], mode='markers', name=file_name))
+
+    # Display the merged figure in the app
+    st.plotly_chart(merged_fig, use_container_width=True)
     
