@@ -112,6 +112,7 @@ if run_button:
     for file_name, df in dataframes.items():
         downsampled_df = downsample_dataframe(df, downsample_factor)
         merged_fig1.add_trace(go.Scatter(x=downsampled_df['Displacement'], y=downsampled_df['Force'], mode='markers', name=file_name))
+        merged_fig1.update_traces(marker={'size': 1})
     # Display the merged figure in the app
     st.plotly_chart(merged_fig1, use_container_width=True)
     
@@ -125,6 +126,7 @@ if run_button:
     for file_name, df in dataframes.items():
         downsampled_df = downsample_dataframe(df, downsample_factor)
         merged_fig2.add_trace(go.Scatter(x=downsampled_df['aeq'], y=downsampled_df['GI'], mode='markers', name=file_name))
+        merged_fig2.update_traces(marker={'size': 1})
     # Display the merged figure in the app
     st.plotly_chart(merged_fig2, use_container_width=True)
     
