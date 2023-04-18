@@ -129,7 +129,7 @@ if run_button:
     # Iterate over the DataFrames and add the data to the merged figure
     for file_name, df in dataframes.items():
         merged_fig.add_trace(go.Scatter(x=df['Displacement'], y=df['Force'], mode='markers', name=file_name))
-
+        merged_fig.update_traces(marker=dict(size=1))
     # Display the merged figure in the app
     st.plotly_chart(merged_fig, use_container_width=True)
     
