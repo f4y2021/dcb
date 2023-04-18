@@ -19,6 +19,7 @@ import re
 import sys
 
 st.set_page_config(page_title="DCB",page_icon="⏩")
+st.set_page_config(layout="wide")
 
 m = st.markdown("""
 <style>
