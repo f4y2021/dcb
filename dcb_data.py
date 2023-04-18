@@ -18,8 +18,8 @@ from plotly.subplots import make_subplots
 import re
 import sys
 
-st.set_page_config(page_title="DCB",page_icon="⏩")
-st.set_page_config(layout="wide")
+st.set_page_config(page_title="DCB",page_icon="⏩",layout="wide")
+
 
 m = st.markdown("""
 <style>
