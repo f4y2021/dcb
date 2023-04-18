@@ -96,7 +96,7 @@ if run_button:
     df['A']=((108*df['C']+12*sqrt(3*((4*beta**3+27*(-df['C'])**2*alpha)/(alpha))))*alpha**2)**(1/3)
     df['aeq']=df['A']/(6*alpha)-((2*beta)/(df['A']))
     df['GI']=((6*df["Force"]**2)/(B**2*h))*(((2*df['aeq']**2)/(E_inter*h**2))+((1)/(5*G13)))
-    st.write(df)
+    st.dataframe(df)
     fig2 = px.scatter(df, x='aeq', y='GI', color_discrete_sequence=["black"], 
                      template="ggplot2", title="R Curve", 
                      labels={"aeq": "Crack Equivalent Length (mm)", "GI": "Gk (N/mm)"},)
