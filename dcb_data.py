@@ -68,7 +68,7 @@ run_button=st.button("Run")
 
 if run_button:
 
-    df = pd.read_csv(uploaded_file, sep=",",usecols= [1,2], names=["Displacement","Force"],header=6)
+    df = pd.read_csv(uploaded_file, sep=",",usecols= [1,2], names=["Displacement","Force"],header=8)
 
 
     # Filter out rows with zero displacement
