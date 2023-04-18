@@ -78,28 +78,30 @@ if run_button:
     df["Displacement"] = df["Displacement"] - df["Displacement"].iloc[0]
     df["Force"] = df["Force"]*1000
     df["Force"] = df["Force"] - df["Force"].iloc[0]
-
-
-    tab1, tab2 = st.tabs(["📈 Chart", "🗃 Data"])
-    # Display data as a table and as a graph in two different tabs
-    with tab1:
-        st.write(df)
-    with tab2:
-
-        fig1 = px.scatter(df, x='Displacement', y='Force', color_discrete_sequence=["black"], 
-                     template="ggplot2", title="P − δ Curve", 
-                     labels={"Displacement": "Displacement (mm)", "Force": "Force (kN)"},)
-
-        st.plotly_chart(fig1, use_container_width=True)
-        
+    
     df['C']=df['Displacement']/df['Force']
     df['A']=((108*df['C']+12*sqrt(3*((4*beta**3+27*(-df['C'])**2*alpha)/(alpha))))*alpha**2)**(1/3)
     df['aeq']=df['A']/(6*alpha)-((2*beta)/(df['A']))
     df['GI']=((6*df["Force"]**2)/(B**2*h))*(((2*df['aeq']**2)/(E_inter*h**2))+((1)/(5*G13)))
-    st.dataframe(df)
-    fig2 = px.scatter(df, x='aeq', y='GI', color_discrete_sequence=["black"], 
+
+    tab1, tab2 = st.tabs(["📈 P − δ Curve", "R Curve"])
+    # Display data as a table and as a graph in two different tabs
+    with tab1:
+        fig1 = px.scatter(df, x='Displacement', y='Force', color_discrete_sequence=["black"], 
+                     template="ggplot2", title="P − δ Curve", 
+                     labels={"Displacement": "Displacement (mm)", "Force": "Force (kN)"},)
+        fig1.update_traces(marker=dict(size=2))
+
+        st.plotly_chart(fig1, use_container_width=True)
+    with tab2:
+        fig2 = px.scatter(df, x='aeq', y='GI', color_discrete_sequence=["black"], 
                      template="ggplot2", title="R Curve", 
                      labels={"aeq": "Crack Equivalent Length (mm)", "GI": "Gk (N/mm)"})
-    fig2.update_traces(marker=dict(size=2))
+        fig2.update_traces(marker=dict(size=2))
 
-    st.plotly_chart(fig2, use_container_width=True)
+        st.plotly_chart(fig2, use_container_width=True)
+        
+        
+    
+
+    
