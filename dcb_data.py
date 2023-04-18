@@ -83,6 +83,12 @@ def process_file(file):
 
     return df
 
+downsample_factor=50
+
+def downsample_dataframe(df, downsample_factor):
+    if downsample_factor <= 1:
+        return df
+    return df.iloc[::downsample_factor, :]
 
 run_button=st.button("Run")
 
@@ -104,6 +110,7 @@ if run_button:
 
     # Iterate over the DataFrames and add the data to the merged figure for P - Delta Curves
     for file_name, df in dataframes.items():
+        downsampled_df = downsample_dataframe(df, downsample_factor)
         merged_fig1.add_trace(go.Scatter(x=df['Displacement'], y=df['Force'], mode='markers', name=file_name))
     # Display the merged figure in the app
     st.plotly_chart(merged_fig1, use_container_width=True)
@@ -116,6 +123,7 @@ if run_button:
     
         # Iterate over the DataFrames and add the data to the merged figure for P - Delta Curves
     for file_name, df in dataframes.items():
+        downsampled_df = downsample_dataframe(df, downsample_factor)
         merged_fig2.add_trace(go.Scatter(x=df['aeq'], y=df['GI'], mode='markers', name=file_name))
     # Display the merged figure in the app
     st.plotly_chart(merged_fig2, use_container_width=True)
