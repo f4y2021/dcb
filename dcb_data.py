@@ -62,14 +62,11 @@ Ef=(C0-(12*inc)/(5*B*h*G13))**(-1)*((8*inc**3)/(B*h**3))
 
 st.write(Ef)
         
-uploaded_file = st.file_uploader("Upload DCB RAW Data CSV file", type=["csv"])
+uploaded_files = st.file_uploader("Upload DCB RAW Data CSV files", type=["csv"], accept_multiple_files=True)
 
-run_button=st.button("Run")
-
-if run_button:
-
-    df = pd.read_csv(uploaded_file, sep=",",usecols= [1,2], names=["Displacement","Force"],header=6)
-
+def process_file(file):
+    # Read the CSV file into a pandas DataFrame
+    df = pd.read_csv(file, sep=",", usecols=[1, 2], names=["Displacement", "Force"], header=6)
 
     # Filter out rows with zero displacement
     df = df.loc[df["Displacement"] != 0]
@@ -83,6 +80,29 @@ if run_button:
     df['A']=((108*df['C']+12*sqrt(3*((4*beta**3+27*(-df['C'])**2*alpha)/(alpha))))*alpha**2)**(1/3)
     df['aeq']=df['A']/(6*alpha)-((2*beta)/(df['A']))
     df['GI']=((6*df["Force"]**2)/(B**2*h))*(((2*df['aeq']**2)/(E_inter*h**2))+((1)/(5*G13)))
+
+    return df
+
+
+run_button=st.button("Run")
+
+if run_button:
+
+    # Initialize an empty dictionary to store the DataFrames for each file
+    dataframes = {}
+    
+    
+    # Process each uploaded file and store the resulting DataFrame in the dictionary
+    for file in uploaded_files:
+        processed_df = process_file(file)
+        dataframes[file.name] = processed_df
+        
+    # Create a dropdown menu to select the file to display
+    selected_file = st.selectbox("Select a file to display", list(dataframes.keys()))
+
+    # Show the DataFrame and graphs for the selected file
+    if selected_file:
+        df = dataframes[selected_file]
 
     tab1, tab2 = st.tabs(["📈 P − δ Curve", "R Curve"])
     # Display data as a table and as a graph in two different tabs
