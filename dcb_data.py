@@ -100,5 +100,9 @@ if run_button:
     fig2 = px.scatter(df, x='aeq', y='GI', color_discrete_sequence=["black"], 
                      template="ggplot2", title="R Curve", 
                      labels={"aeq": "Crack Equivalent Length (mm)", "GI": "Gk (N/mm)"})
+    fig2.update_traces(marker=dict(size=1,
+                              line=dict(width=2,
+                                        color='DarkSlateGrey')),
+                  selector=dict(mode='markers'))
 
     st.plotly_chart(fig2, use_container_width=True)
