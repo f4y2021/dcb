@@ -116,7 +116,7 @@ if run_button:
         downsampled_df = downsample_dataframe(df, downsample_factor)
         merged_fig1.add_trace(go.Scatter(x=downsampled_df['Displacement'], y=downsampled_df['Force'], mode='markers', name=file_name))
         merged_fig1.update_traces(marker={'size': 3})
-        
+        merged_fig1.update_layout(xaxis_range=[0,5])
     # Display the merged figure in the app
     st.plotly_chart(merged_fig1, use_container_width=True)
 
