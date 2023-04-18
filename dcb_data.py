@@ -95,41 +95,28 @@ if run_button:
     for file in uploaded_files:
         processed_df = process_file(file)
         dataframes[file.name] = processed_df
-        
-    # Create a dropdown menu to select the file to display
-    selected_file = st.selectbox("Select a file to display", list(dataframes.keys()))
-
-    # Show the DataFrame and graphs for the selected file
-    if selected_file:
-        df = dataframes[selected_file]
-
-    
-    fig1 = px.scatter(df, x='Displacement', y='Force', color_discrete_sequence=["black"], 
-                 template="ggplot2", title="P − δ Curve", 
-                 labels={"Displacement": "Displacement (mm)", "Force": "Force (N)"},)
-    fig1.update_traces(marker=dict(size=2))
-
-    st.plotly_chart(fig1, use_container_width=True)
-
-    fig2 = px.scatter(df, x='aeq', y='GI', color_discrete_sequence=["black"], 
-                 template="ggplot2", title="R Curve", 
-                 labels={"aeq": "Crack Equivalent Length (mm)", "GI": "Gk (N/mm)"})
-    fig2.update_traces(marker=dict(size=2))
-
-    st.plotly_chart(fig2, use_container_width=True)
-        
-        
     
     # Create an empty figure with layout options
-    merged_fig = go.Figure(layout=go.Layout(title="P − δ Curve (Merged)",
+    merged_fig1 = go.Figure(layout=go.Layout(title="P − δ Curves",
+                                            xaxis_title="Crack Equivalent Length (mm)",
+                                            yaxis_title="Gk (N/mm)",
+                                            template="ggplot2"))
+
+    # Iterate over the DataFrames and add the data to the merged figure for P - Delta Curves
+    for file_name, df in dataframes.items():
+        merged_fig1.add_trace(go.Scatter(x=df['Displacement'], y=df['Force'], mode='markers', name=file_name))
+    # Display the merged figure in the app
+    st.plotly_chart(merged_fig1, use_container_width=True)
+    
+    # Create an empty figure with layout options
+    merged_fig2 = go.Figure(layout=go.Layout(title="R Curves",
                                             xaxis_title="Displacement (mm)",
                                             yaxis_title="Force (N)",
                                             template="ggplot2"))
-
-    # Iterate over the DataFrames and add the data to the merged figure
+    
+        # Iterate over the DataFrames and add the data to the merged figure for P - Delta Curves
     for file_name, df in dataframes.items():
-        merged_fig.add_trace(go.Scatter(x=df['Displacement'], y=df['Force'], mode='markers', name=file_name))
-        merged_fig.update_traces(marker=dict(size=1))
+        merged_fig2.add_trace(go.Scatter(x=df['aeq'], y=df['GI'], mode='markers', name=file_name))
     # Display the merged figure in the app
-    st.plotly_chart(merged_fig, use_container_width=True)
+    st.plotly_chart(merged_fig2, use_container_width=True)
     
