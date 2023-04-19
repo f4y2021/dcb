@@ -24,7 +24,7 @@ st.set_page_config(page_title="DCB",page_icon="⏩")
 st.image('feup.png')
 
 
-with st.columns(3)[2]:
+with st.columns(3)[1,3,1]:
     st.text("Diogo Cardoso | up201505446")
 
 #st.latex("\text{PRODEM \,\ | \,\ Diogo \,\ Cardoso \,\ | \,\ up201505446}")
