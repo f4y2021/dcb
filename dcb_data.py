@@ -23,8 +23,9 @@ st.set_page_config(page_title="DCB",page_icon="⏩")
 
 st.image('feup.png')
 
-with st.columns(3)[1]:
-    st.text("PRODEM | Diogo Cardoso | up201505446")
+st.markdown("<h1 style='text-align: center; color: red;'>Some title</h1>", unsafe_allow_html=True)
+
+st.text("PRODEM | Diogo Cardoso | up201505446")
 
 #st.latex("\text{PRODEM \,\ | \,\ Diogo \,\ Cardoso \,\ | \,\ up201505446}")
 
