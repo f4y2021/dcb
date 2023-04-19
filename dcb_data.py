@@ -73,11 +73,12 @@ Ef=(C0-(12*inc)/(5*B*h*G13))**(-1)*((8*inc**3)/(B*h**3))
 
 
 with st.expander("Intermediate Calculation"):
-        st.write(T)
-        st.write(delta)
-        st.write(alpha)
-        st.write(beta)
-        st.write(Ef)
+    st.latex(r'''G_I=\frac{6P_^2}{2B_^2}\left(\frac{2a_e^2}{h_^2E_l}+\frac{1}{5G_{\mathrm{l3}}}\right)''')
+    st.write(T)
+    st.write(delta)
+    st.write(alpha)
+    st.write(beta)
+    st.write(Ef)
         
 uploaded_files = st.file_uploader("Upload DCB RAW Data CSV files", type=["csv"], accept_multiple_files=True)
 
