@@ -20,6 +20,7 @@ import sys
 
 st.set_page_config(page_title="DCB",page_icon="⏩")
 
+st.image('feup.png', width=400)
 
 m = st.markdown("""
 <style>
@@ -46,7 +47,7 @@ with st.expander("User Inputs"):
         st.caption("Material Properties")
         G13=st.number_input("Shear modulus (GPa)",value=2500)
         E2=st.number_input("Young’s modulus in the longitudinal direction (GPa)",value=8820)
-        
+    st.image('dcb.png', width=400) 
 E_inter=93600
 C0=1.08
 
