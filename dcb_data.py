@@ -23,6 +23,8 @@ st.set_page_config(page_title="DCB",page_icon="⏩")
 with st.columns(3)[1]:
     st.image('feup.png', width=400)
 
+st.latex("\textsc{PRODEM}")
+
 m = st.markdown("""
 <style>
 div.stButton > button:first-child {
