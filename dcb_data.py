@@ -25,7 +25,7 @@ st.image('feup.png')
 
 colx, coly, colz = st.columns([1,3,1])
 
-coly.st.text("PRODEM | Diogo Cardoso | up201505446")
+coly.text("PRODEM | Diogo Cardoso | up201505446")
 
 #st.latex("\text{PRODEM \,\ | \,\ Diogo \,\ Cardoso \,\ | \,\ up201505446}")
 
