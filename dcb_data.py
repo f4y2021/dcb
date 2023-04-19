@@ -27,7 +27,6 @@ colx, coly, colz = st.columns([1,2,1])
 
 coly.text("PRODEM | Diogo Cardoso | up201505446")
 
-#st.latex("\text{PRODEM \,\ | \,\ Diogo \,\ Cardoso \,\ | \,\ up201505446}")
 
 m = st.markdown("""
 <style>
@@ -41,35 +40,42 @@ st.title('DCB Data Analysis')
 
 # User Inputs
 
-with st.expander("User Inputs"):
-    a0 = st.number_input("a0 | Initial Pre-Crack Length [mm]",value=50)
-    colunas12,colunas22 = st.columns(2)
 
-    with colunas12:
-        st.caption("Geometric Properties")
-        B = st.number_input("B | Specimen Width [mm]",value=25)
-        thickness= st.number_input("2h | Specimen Thickness [mm]",value=4.4)
-        h=thickness/2
-    with colunas22:
-        st.caption("Material Properties")
-        G13=st.number_input("Shear modulus (GPa)",value=2500)
-        E2=st.number_input("Young’s modulus in the longitudinal direction (GPa)",value=8820)
-    st.image('dcb.png', width=600) 
+a0 = st.number_input("a0 | Initial Pre-Crack Length [mm]",value=50)
+colunas12,colunas22 = st.columns(2)
+
+with colunas12:
+    st.caption("Geometric Properties")
+    B = st.number_input("B | Specimen Width [mm]",value=25)
+    thickness= st.number_input("2h | Specimen Thickness [mm]",value=4.4)
+    h=thickness/2
+with colunas22:
+    st.caption("Material Properties")
+    G13=st.number_input("Shear modulus (GPa)",value=2500)
+    E2=st.number_input("Young’s modulus in the longitudinal direction (GPa)",value=8820)
+st.image('dcb.png', width=600) 
+
 E_inter=93600
 C0=1.08
 
 T=1.18*(sqrt(E2*E_inter))/G13
-st.write(T)
+
 delta=h*sqrt((E_inter/(11*G13))*(3-2*(T/(1+T))**2))
-st.write(delta)
+
 alpha=8/(B*h**3*E_inter)
-st.write(alpha)
+
 beta=12/(5*B*h*G13)
-st.write(beta)
+
 inc=a0+delta
 Ef=(C0-(12*inc)/(5*B*h*G13))**(-1)*((8*inc**3)/(B*h**3))
 
-st.write(Ef)
+
+with st.expander("Intermediate Calculation"):
+        st.write(T)
+        st.write(delta)
+        st.write(alpha)
+        st.write(beta)
+        st.write(Ef)
         
 uploaded_files = st.file_uploader("Upload DCB RAW Data CSV files", type=["csv"], accept_multiple_files=True)
 
