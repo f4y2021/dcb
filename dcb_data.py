@@ -23,7 +23,7 @@ st.set_page_config(page_title="DCB",page_icon="⏩")
 
 st.image('feup.png')
 
-st.latex("PRODEM \,\ | \,\ Diogo \,\ Cardoso \,\ | \,\ up201505446")
+st.latex("\text{PRODEM \,\ | \,\ Diogo \,\ Cardoso \,\ | \,\ up201505446}")
 
 m = st.markdown("""
 <style>
