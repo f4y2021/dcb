@@ -21,9 +21,9 @@ import sys
 st.set_page_config(page_title="DCB",page_icon="⏩")
 
 with st.columns(3)[1]:
-    st.image('feup.png', width=400)
+    st.image('feup.png', width=600)
 
-st.latex("PRODEM \,\ | \,\ Diogo Cardoso \,\ | \,\ up201505446")
+st.latex("PRODEM \,\ | \,\ Diogo \,\ Cardoso \,\ | \,\ up201505446")
 st.write("PRODEM | Diogo Cardoso | up201505446")
 m = st.markdown("""
 <style>
