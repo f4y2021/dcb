@@ -23,7 +23,7 @@ st.set_page_config(page_title="DCB",page_icon="⏩")
 
 st.image('feup.png')
 
-st.markdown("<h1 style='text-align: center;'>PRODEM | Diogo Cardoso | up201505446</h1>", unsafe_allow_html=True)
+st.markdown("'text-align: center;'>PRODEM | Diogo Cardoso | up201505446</h1>", unsafe_allow_html=True)
 
 
 
