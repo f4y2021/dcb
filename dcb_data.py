@@ -53,7 +53,8 @@ with colunas22:
     st.caption("Material Properties")
     G13=st.number_input("Shear modulus (GPa)",value=2500)
     E2=st.number_input("Young’s modulus in the longitudinal direction (GPa)",value=8820)
-st.image('dcb.png', width=600) 
+colunas111,colunas222,colunas333 = st.columns(3)
+colunas222.image('dcb.png', width=600) 
 
 E_inter=93600
 C0=1.08
