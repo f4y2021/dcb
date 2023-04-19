@@ -36,13 +36,13 @@ st.title('DCB Data Analysis')
 # User Inputs
 
 with st.expander("User Inputs"):
-    a0 = st.number_input("Initial Pre-Crack Length [mm]",value=50)
+    a0 = st.number_input("a0 | Initial Pre-Crack Length [mm]",value=50)
     colunas12,colunas22 = st.columns(2)
 
     with colunas12:
         st.caption("Geometric Properties")
-        B = st.number_input("Specimen Width [mm]",value=25)
-        thickness= st.number_input("Specimen Thickness [mm]",value=4.4)
+        B = st.number_input("B | Specimen Width [mm]",value=25)
+        thickness= st.number_input("2h | Specimen Thickness [mm]",value=4.4)
         h=thickness/2
     with colunas22:
         st.caption("Material Properties")
