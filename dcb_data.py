@@ -25,7 +25,8 @@ st.image('feup.png')
 
 st.markdown("'text-align: center;'>PRODEM | Diogo Cardoso | up201505446</h1>", unsafe_allow_html=True)
 
-
+with st.columns(3)[1]:
+    st.text("Diogo Cardoso | up201505446")
 
 #st.latex("\text{PRODEM \,\ | \,\ Diogo \,\ Cardoso \,\ | \,\ up201505446}")
 
