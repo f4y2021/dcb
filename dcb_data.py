@@ -148,7 +148,7 @@ if run_button:
         downsampled_df = downsample_dataframe(df, downsample_factor)
         merged_fig2.add_trace(go.Scatter(x=downsampled_df['aeq'], y=downsampled_df['GI'], mode='markers', name=file_name))
         merged_fig2.update_traces(marker={'size': 3})
-        merged_fig2.update_layout(xaxis_range=[40,65],yaxis_range=[0,0.32])
+        merged_fig2.update_layout(xaxis_range=[40,60],yaxis_range=[0,0.25])
     # Display the merged figure in the app
     st.plotly_chart(merged_fig2, use_container_width=True)
 
