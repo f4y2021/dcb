@@ -109,7 +109,7 @@ if run_button:
     merged_fig1 = go.Figure(layout=go.Layout(title="P − δ Curves",
                                             xaxis_title="Crack Equivalent Length (mm)",
                                             yaxis_title="Gk (N/mm)",
-                                            template="ggplot2"))
+                                            template="streamlit"))
 
     # Iterate over the DataFrames and add the data to the merged figure for P - Delta Curves
     for file_name, df in dataframes.items():
