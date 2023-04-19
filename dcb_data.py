@@ -42,6 +42,10 @@ st.title('DCB Data Analysis')
 
 
 a0 = st.number_input("a0 | Initial Pre-Crack Length [mm]",value=50)
+
+st.image('dcb.png', width=700) 
+
+
 colunas12,colunas22 = st.columns(2)
 
 with colunas12:
@@ -54,7 +58,7 @@ with colunas22:
     G13=st.number_input("Shear modulus (GPa)",value=2500)
     E2=st.number_input("Young’s modulus in the longitudinal direction (GPa)",value=8820)
     
-st.image('dcb.png', width=700) 
+
 
 E_inter=93600
 C0=1.08
