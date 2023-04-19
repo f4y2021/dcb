@@ -23,7 +23,7 @@ st.set_page_config(page_title="DCB",page_icon="⏩")
 
 st.image('feup.png')
 
-colx, coly, colz = st.columns(3)
+colx, coly, colz = st.columns([1,4,1])
 
 coly.text("PRODEM | Diogo Cardoso | up201505446")
 
