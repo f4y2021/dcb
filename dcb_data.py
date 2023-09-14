@@ -123,8 +123,8 @@ if run_button:
     
     # Create an empty figure with layout options
     merged_fig1 = go.Figure(layout=go.Layout(title="P − δ Curves",
-                                            xaxis_title="Crack Equivalent Length (mm)",
-                                            yaxis_title="Gk (N/mm)",
+                                            xaxis_title="Displacement (mm)",
+                                            yaxis_title="Force (N)",
                                             template="streamlit"))
 
     # Iterate over the DataFrames and add the data to the merged figure for P - Delta Curves
@@ -139,8 +139,8 @@ if run_button:
 
     # Create an empty figure with layout options
     merged_fig2 = go.Figure(layout=go.Layout(title="R Curves",
-                                            xaxis_title="Displacement (mm)",
-                                            yaxis_title="Force (N)",
+                                            xaxis_title="Crack Equivalent Length (mm)",
+                                            yaxis_title="Gc (N/mm)",
                                             template="streamlit"))
 
         # Iterate over the DataFrames and add the data to the merged figure for P - Delta Curves
@@ -148,7 +148,7 @@ if run_button:
         downsampled_df = downsample_dataframe(df, downsample_factor)
         merged_fig2.add_trace(go.Scatter(x=downsampled_df['aeq'], y=downsampled_df['GI'], mode='markers', name=file_name))
         merged_fig2.update_traces(marker={'size': 3})
-        merged_fig2.update_layout(xaxis_range=[40,60],yaxis_range=[0,0.25])
+        merged_fig2.update_layout(xaxis_range=[50,60],yaxis_range=[0,0.25])
     # Display the merged figure in the app
     st.plotly_chart(merged_fig2, use_container_width=True)
 
